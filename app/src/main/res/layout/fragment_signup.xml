@@ -4,55 +4,78 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
     tools:context=".signupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="24dp"
         >
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:boxBackgroundColor="#1A1A1A"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="Enter Username"
                 android:id="@+id/tiet_username"
-                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="#AAAAAA"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:boxBackgroundColor="#1A1A1A"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="Enter Password"
                 android:id="@+id/tiet_password"
-                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="#AAAAAA"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/white"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:boxBackgroundColor="#1A1A1A"
             >
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:hint="Confirm Password"
                 android:id="@+id/tiet_Cpassword"
-                android:layout_margin="10dp"
+                android:textColor="@color/white"
+                android:textColorHint="#AAAAAA"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -61,22 +84,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="24dp"
             >
-            <Button
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="cancel"
+                android:text="Cancel"
                 android:layout_weight="1"
                 android:id="@+id/btn_cancel"
-                android:layout_margin="10dp"
+                android:layout_margin="6dp"
+                app:backgroundTint="#333333"
+                android:textColor="@color/white"
+                app:cornerRadius="8dp"
                 />
-            <Button
-                android:layout_width="match_parent"
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="Register"
                 android:layout_weight="1"
                 android:id="@+id/btn_signup"
-                android:layout_margin="10dp"
+                android:layout_margin="6dp"
+                app:backgroundTint="@color/white"
+                android:textColor="@color/black"
+                app:cornerRadius="8dp"
                 />
         </LinearLayout>
 
