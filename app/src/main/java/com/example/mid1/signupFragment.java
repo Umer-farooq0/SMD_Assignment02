@@ -24,7 +24,7 @@ import com.google.android.material.textfield.TextInputEditText;
  * create an instance of this fragment.
  */
 public class signupFragment extends Fragment {
-    Button btn_signup , btn_cancel;
+    Button btn_signup ;
     TextInputEditText tiet_username , tiet_password , tiet_Cpassword;
 
     SharedPreferences sPref;
@@ -82,27 +82,23 @@ public class signupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         btn_signup = view.findViewById(R.id.btn_signup);
-        btn_cancel = view.findViewById(R.id.btn_cancel);
         tiet_username = view.findViewById(R.id.tiet_username);
         tiet_password = view.findViewById(R.id.tiet_password);
         tiet_Cpassword = view.findViewById(R.id.tiet_Cpassword);
         sPref = getActivity().getSharedPreferences("user", MODE_PRIVATE);
         editor = sPref.edit();
 
-        btn_cancel.setOnClickListener((v)->{
-            tiet_username.setText("");
-            tiet_password.setText("");
-            tiet_Cpassword.setText("");
-        });
         btn_signup.setOnClickListener((v)->{
             String username = tiet_username.getText().toString().trim();
             String password = tiet_password.getText().toString().trim();
             String Cpassword = tiet_Cpassword.getText().toString().trim();
             if(username.isEmpty() || password.isEmpty() || Cpassword.isEmpty()){
                 Toast.makeText(this.getContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                return;
             }
             if(!password.equals(Cpassword)){
                 Toast.makeText(this.getContext(), "Password does not match", Toast.LENGTH_LONG).show();
+                return;
             }
             editor.putString("username",username);
             editor.putString("password",password);

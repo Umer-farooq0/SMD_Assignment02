@@ -25,7 +25,7 @@ import com.google.android.material.textfield.TextInputEditText;
  */
 public class loginFragment extends Fragment {
 
-    Button btn_login , btn_cancel;
+    Button btn_login ;
     TextInputEditText tiet_username , tiet_password;
 
     SharedPreferences sPref;
@@ -85,7 +85,6 @@ public class loginFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         btn_login = view.findViewById(R.id.btn_login);
-        btn_cancel = view.findViewById(R.id.btn_cancel);
         tiet_username = view.findViewById(R.id.tiet_username);
         tiet_password = view.findViewById(R.id.tiet_password);
         sPref = getActivity().getSharedPreferences("user", MODE_PRIVATE);
@@ -94,9 +93,6 @@ public class loginFragment extends Fragment {
 
         btn_login.setOnClickListener((v)->{
             login();
-        });
-        btn_cancel.setOnClickListener((v)->{
-            getActivity().finish();
         });
     }
 

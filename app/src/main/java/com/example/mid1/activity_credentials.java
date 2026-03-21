@@ -3,6 +3,7 @@ package com.example.mid1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -44,7 +45,7 @@ public class activity_credentials extends AppCompatActivity {
 
     private void checkAlreadyLoggedIn() {
         if(sPref.getBoolean("isLogin" , false)){
-            startActivity(new Intent(this, MainActivity2.class)) ;
+            startActivity(new Intent(this, MainActivity.class)) ;
             finish();
         }
     }
@@ -69,6 +70,6 @@ public class activity_credentials extends AppCompatActivity {
             }
         });
         mediator.attach();
-
+        tablayout.setSelectedTabIndicatorColor(Color.WHITE);
     }
 }
