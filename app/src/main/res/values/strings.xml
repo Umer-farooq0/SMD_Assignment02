@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mid1</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desc_cards">Sony Premium Wireless Headphones are high-quality over-ear headphones that deliver immersive sound with rich bass and clear highs. Featuring wireless Bluetooth connectivity, long battery life, and comfortable ear cushions, they’re great for music, calls, and travel. Built-in noise cancellation keeps distractions out so you can enjoy audio in style.</string>
+    <string name="desc_deal">The RØDE PodMic is a professional dynamic microphone designed for podcasting, streaming, and voice recording. It delivers rich, clear sound with excellent background noise rejection, making it ideal for studio and home setups. Built with a durable metal body and internal pop filter, it ensures reliable performance and clean vocals</string>
+</resources>
