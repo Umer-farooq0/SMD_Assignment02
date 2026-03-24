@@ -32,8 +32,12 @@ public class HomeFragment extends Fragment {
         rvItems = view.findViewById(R.id.rvItems);
         rvItems.setHasFixedSize(true);
 
-        MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_1, "Model: WH-1000M4, Black", " sony", false));
-        MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_2, "Model: WH-1000M4, Beige", " sony", false));
+        // Only populate items list once to avoid duplicates when re-navigating
+        if (MyApplication.items.isEmpty()) {
+            MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_1, "Model: WH-1000M4, Black", getString(R.string.desc_cards), false));
+            MyApplication.items.add(new items("Sony Premium Wireless Headphones", "$349.99", R.drawable.sony_premium_2, "Model: WH-1000M4, Beige", getString(R.string.desc_cards), false));
+            MyApplication.items.add(new items("RODE PodMic", "$108.20", R.drawable.rod_podmic, "Dynamic microphone, Speaker microphone", getString(R.string.desc_deal), false));
+        }
 
         adapter = new ItemAdapter(requireContext(), MyApplication.items);
         rvItems.setLayoutManager(new GridLayoutManager(requireContext(),2));

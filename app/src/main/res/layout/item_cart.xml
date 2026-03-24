@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical">
+
+    <!-- Product Name and Price -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cart_item_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:maxLines="2"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/tv_cart_item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="@color/price_red"
+            android:textStyle="bold"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <!-- Quantity Controls: − qty + -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="4dp">
+
+        <Button
+            android:id="@+id/btn_cart_decrease"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="@string/btn_decrease"
+            android:textSize="18sp"
+            android:padding="0dp"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_cart_item_quantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:textColor="@color/text_primary" />
+
+        <Button
+            android:id="@+id/btn_cart_increase"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:text="@string/btn_increase"
+            android:textSize="18sp"
+            android:padding="0dp"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <!-- Three-dot menu: immediately removes from cart (no dialog) -->
+    <ImageButton
+        android:id="@+id/btn_cart_item_menu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:src="@drawable/threedot_menu"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:scaleType="centerInside"
+        android:contentDescription="@string/remove_from_cart" />
+
+</LinearLayout>

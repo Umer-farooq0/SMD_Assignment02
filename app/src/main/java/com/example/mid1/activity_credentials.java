@@ -3,7 +3,6 @@ package com.example.mid1;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
@@ -44,8 +44,8 @@ public class activity_credentials extends AppCompatActivity {
     }
 
     private void checkAlreadyLoggedIn() {
-        if(sPref.getBoolean("isLogin" , false)){
-            startActivity(new Intent(this, MainActivity.class)) ;
+        if(sPref.getBoolean("user.isLogin" , false)){
+            startActivity(new Intent(this, MainActivity2.class)) ;
             finish();
         }
     }
@@ -70,6 +70,6 @@ public class activity_credentials extends AppCompatActivity {
             }
         });
         mediator.attach();
-        tablayout.setSelectedTabIndicatorColor(Color.WHITE);
+        tablayout.setSelectedTabIndicatorColor(ContextCompat.getColor(this, R.color.white));
     }
 }

@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_logout.setOnClickListener(v->{
             startActivity(new Intent(this,splash.class));
-            editor.putBoolean("isLogin",false);
+            editor.putBoolean("user.isLogin",false);
             editor.commit();
             finish();
         });

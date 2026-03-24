@@ -100,9 +100,9 @@ public class signupFragment extends Fragment {
                 Toast.makeText(this.getContext(), "Password does not match", Toast.LENGTH_LONG).show();
                 return;
             }
-            editor.putString("username",username);
-            editor.putString("password",password);
-            editor.putBoolean("isLogin",true);
+            editor.putString("user.username",username);
+            editor.putString("user.password",password);
+            editor.putBoolean("user.isLogin",true);
             editor.commit();
 
             startActivity(new Intent(this.getContext(), MainActivity2.class));

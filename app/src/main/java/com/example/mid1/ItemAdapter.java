@@ -1,6 +1,7 @@
 package com.example.mid1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -57,6 +58,17 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
                 }
                 MyApplication.favItemAdapter.notifyDataSetChanged();
             }
+        });
+
+        // Open product detail page on card click
+        holder.iv_img.setOnClickListener((v) -> {
+            Intent intent = new Intent(context, detail_card.class);
+            intent.putExtra("image", item.getImage());
+            intent.putExtra("name", item.getName());
+            intent.putExtra("price", item.getPrice());
+            intent.putExtra("desc", item.getDescription());
+            intent.putExtra("detail", item.getDetails());
+            context.startActivity(intent);
         });
     }
 

@@ -31,7 +31,7 @@ public class OnBoarding extends AppCompatActivity {
             SharedPreferences sPref = getSharedPreferences("user", MODE_PRIVATE);
             SharedPreferences.Editor editor = sPref.edit();
 
-            editor.putBoolean("isFirstTime", false);
+            editor.putBoolean("app.isFirstTime", false);
             editor.apply();
 
             startActivity(new Intent(OnBoarding.this, activity_credentials.class));
