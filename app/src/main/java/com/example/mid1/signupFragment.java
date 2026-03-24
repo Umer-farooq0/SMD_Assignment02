@@ -105,7 +105,7 @@ public class signupFragment extends Fragment {
             editor.putBoolean("isLogin",true);
             editor.commit();
 
-            startActivity(new Intent(this.getContext(), MainActivity.class));
+            startActivity(new Intent(this.getContext(), MainActivity2.class));
             getActivity().finish();
 
 

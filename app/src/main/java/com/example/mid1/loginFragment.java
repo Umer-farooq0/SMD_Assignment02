@@ -1,4 +1,10 @@
-package com.example.mid1;
+
+
+
+
+
+
+    package com.example.mid1;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -99,20 +105,19 @@ public class loginFragment extends Fragment {
         void login(){
 
             if (tiet_username.getText().toString().trim().isEmpty() || tiet_password.getText().toString().trim().isEmpty()){
-                Toast.makeText(this.getContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
             }
             else
             if(sPref.getString("username","").equals(tiet_username.getText().toString().trim())
                     && sPref.getString("password","").equals(tiet_password.getText().toString().trim())
-            )
-            {
+            ) {
                 editor.putBoolean("isLogin",true);
                 editor.commit();
-                startActivity(new Intent(this.getContext(), MainActivity.class));
+                startActivity(new Intent(requireContext(), MainActivity2.class));
                 getActivity().finish();
             }
             else {
-                Toast.makeText(this.getContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
+                Toast.makeText(requireContext(), "Invalid Credentials", Toast.LENGTH_LONG).show();
             }
         }
 

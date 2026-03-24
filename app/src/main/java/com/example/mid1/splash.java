@@ -1,6 +1,7 @@
 package com.example.mid1;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
@@ -17,7 +18,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class splash extends AppCompatActivity {
 
-    Button btn_getStarted;
+    ImageView logo;
+    TextView appName;
+    SharedPreferences sPref;
+    SharedPreferences.Editor editor;
+
 
 
     @Override
@@ -25,11 +30,36 @@ public class splash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        btn_getStarted = findViewById(R.id.btn_getStarted);
-        btn_getStarted.setOnClickListener((v  )->{
-            Intent i = new Intent(splash.this, activity_credentials.class);
-            startActivity(i);
+        logo = findViewById(R.id.splash_logo);
+        appName = findViewById(R.id.app_name);
+        sPref = getSharedPreferences("user",MODE_PRIVATE);
+
+        // Load animations
+        Animation fadeScale = AnimationUtils.loadAnimation(this, R.anim.splash);
+        Animation slide = AnimationUtils.loadAnimation(this, R.anim.left_to_right);
+
+        // Apply animations
+        logo.startAnimation(fadeScale);
+        appName.startAnimation(slide);
+
+        // Move to next screen after delay
+        new Handler().postDelayed(() -> {
+
+            boolean isFirstTime = sPref.getBoolean("isFirstTime", true);
+            boolean isLogin = sPref.getBoolean("isLogin", false);
+
+            if (isFirstTime) {
+                startActivity(new Intent(splash.this, OnBoarding.class));
+            }
+            else if (!isLogin) {
+                startActivity(new Intent(splash.this, activity_credentials.class));
+            }
+            else {
+                startActivity(new Intent(splash.this, MainActivity2.class));
+            }
+
             finish();
-        });
+
+        }, 3000);
     }
 }

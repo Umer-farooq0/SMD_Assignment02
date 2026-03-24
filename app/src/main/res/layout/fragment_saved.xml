@@ -6,12 +6,10 @@
     tools:context=".SavedFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:text="Hello from Saved fragment" />
+        android:id="@+id/rv_saved"
+        />
 
 </FrameLayout>

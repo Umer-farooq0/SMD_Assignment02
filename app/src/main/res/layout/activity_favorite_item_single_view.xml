@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center">
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/iv_fav_product_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="centerInside"
+        android:padding="12dp"
+        android:background="#F0F0F0"
+        android:src="@drawable/sony_premium_1"
+        android:layout_marginEnd="12dp" />
+
+    <!-- Product Details Container -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingEnd="12dp">
+
+        <!-- Price -->
+        <TextView
+            android:id="@+id/tv_fav_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$349.99"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000000"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Product Name -->
+        <TextView
+            android:id="@+id/tv_fav_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SONY Premium Wireless Headphones"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#222222"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_marginBottom="2dp" />
+
+        <!-- Product Description -->
+        <TextView
+            android:id="@+id/tv_fav_product_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Model: WH-1000XM4, Black"
+            android:textSize="11sp"
+            android:textColor="#999999"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+    </LinearLayout>
+
+    <!-- Add to Cart Button -->
+    <ImageButton
+        android:id="@+id/iv_fav_cart_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/cart"
+        android:contentDescription="Add to cart"
+        android:layout_marginEnd="8dp" />
+
+    <!-- Menu Button (More Options) -->
+    <ImageButton
+        android:id="@+id/iv_fav_menu_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="8dp"
+        android:scaleType="centerInside"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/threedot_menu"
+        android:contentDescription="More options" />
+
+</LinearLayout>
