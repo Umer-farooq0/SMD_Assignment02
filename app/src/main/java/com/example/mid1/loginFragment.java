@@ -108,10 +108,10 @@ public class loginFragment extends Fragment {
                 Toast.makeText(requireContext(), "Please fill all the fields", Toast.LENGTH_LONG).show();
             }
             else
-            if(sPref.getString("username","").equals(tiet_username.getText().toString().trim())
-                    && sPref.getString("password","").equals(tiet_password.getText().toString().trim())
+            if(sPref.getString("user.username","").equals(tiet_username.getText().toString().trim())
+                    && sPref.getString("user.password","").equals(tiet_password.getText().toString().trim())
             ) {
-                editor.putBoolean("isLogin",true);
+                editor.putBoolean("user.isLogin",true);
                 editor.commit();
                 startActivity(new Intent(requireContext(), MainActivity2.class));
                 getActivity().finish();

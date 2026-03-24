@@ -1,64 +1,161 @@
 package com.example.mid1;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.telephony.SmsManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.material.button.MaterialButton;
+
+import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link CartFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Cart fragment displaying all products added to the cart.
+ * Users can increase/decrease quantities, remove items with the three-dot icon,
+ * and checkout by pressing the Checkout button (which sends an SMS with order details).
  */
-public class CartFragment extends Fragment {
+public class CartFragment extends Fragment implements CartItemAdapter.OnCartChangedListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final int SMS_PERMISSION_REQUEST = 3;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CartFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CartFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CartFragment newInstance(String param1, String param2) {
-        CartFragment fragment = new CartFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    RecyclerView rvCart;
+    TextView tvCartTotal;
+    TextView tvCartEmpty;
+    MaterialButton btnCheckout;
+    CartItemAdapter cartAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cart, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        rvCart = view.findViewById(R.id.rv_cart);
+        tvCartTotal = view.findViewById(R.id.tv_cart_total);
+        tvCartEmpty = view.findViewById(R.id.tv_cart_empty);
+        btnCheckout = view.findViewById(R.id.btn_checkout);
+
+        // Set up RecyclerView with cart items from global list
+        cartAdapter = new CartItemAdapter(requireContext(), MyApplication.cartItems, this);
+        rvCart.setLayoutManager(new LinearLayoutManager(requireContext()));
+        rvCart.setAdapter(cartAdapter);
+
+        updateTotalAndVisibility();
+
+        btnCheckout.setOnClickListener(v -> checkoutWithSms());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (cartAdapter != null) {
+            cartAdapter.notifyDataSetChanged();
+            updateTotalAndVisibility();
+        }
+    }
+
+    /** Called by CartItemAdapter whenever the cart changes (add, remove, quantity change). */
+    @Override
+    public void onCartChanged() {
+        updateTotalAndVisibility();
+    }
+
+    /**
+     * Recalculates the total price and toggles the empty-cart message visibility.
+     * Total is the sum of (price × quantity) for all cart items.
+     */
+    private void updateTotalAndVisibility() {
+        double total = calculateTotal();
+        tvCartTotal.setText(getString(R.string.total_label) + " $" + String.format("%.2f", total));
+
+        if (MyApplication.cartItems.isEmpty()) {
+            rvCart.setVisibility(View.GONE);
+            tvCartEmpty.setVisibility(View.VISIBLE);
+        } else {
+            rvCart.setVisibility(View.VISIBLE);
+            tvCartEmpty.setVisibility(View.GONE);
+        }
+    }
+
+    /** Parses a price string like "$349.99" and returns the double value. */
+    private double parsePrice(String priceStr) {
+        try {
+            return Double.parseDouble(priceStr.replace("$", "").trim());
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+    }
+
+    /** Returns the sum of price * quantity for all cart items. */
+    private double calculateTotal() {
+        double total = 0;
+        for (CartItem ci : MyApplication.cartItems) {
+            total += parsePrice(ci.getProduct().getPrice()) * ci.getQuantity();
+        }
+        return total;
+    }
+
+    /** Builds the SMS order summary and initiates sending. */
+    private void checkoutWithSms() {
+        if (MyApplication.cartItems.isEmpty()) {
+            Toast.makeText(requireContext(), getString(R.string.cart_empty), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.SEND_SMS)
+                == PackageManager.PERMISSION_GRANTED) {
+            sendOrderSms();
+        } else {
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_REQUEST);
+        }
+    }
+
+    /**
+     * Builds and sends an SMS containing all cart items and the total price.
+     * Format: product name (xQty) - $lineTotal, then Total at the bottom.
+     */
+    private void sendOrderSms() {
+        StringBuilder message = new StringBuilder("Order from FastMart:\n");
+        int index = 1;
+        for (CartItem ci : MyApplication.cartItems) {
+            double itemPrice = parsePrice(ci.getProduct().getPrice());
+            double lineTotal = itemPrice * ci.getQuantity();
+            message.append(index++).append(". ")
+                    .append(ci.getProduct().getName())
+                    .append(" (x").append(ci.getQuantity()).append(") - $")
+                    .append(String.format("%.2f", lineTotal)).append("\n");
+        }
+        message.append("Total: $").append(String.format("%.2f", calculateTotal()));
+
+        String phoneNumber = getString(R.string.sms_phone_number);
+        try {
+            SmsManager smsManager = SmsManager.getDefault();
+            ArrayList<String> parts = smsManager.divideMessage(message.toString());
+            smsManager.sendMultipartTextMessage(phoneNumber, null, parts, null, null);
+            Toast.makeText(requireContext(), "Order placed! SMS sent.", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(requireContext(),
+                    "Unable to send order SMS. Please check your SMS permissions and try again.",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

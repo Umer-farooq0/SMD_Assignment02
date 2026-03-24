@@ -12,7 +12,7 @@
         android:id="@+id/img_card"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="#D9CFCF"
+        android:background="@color/product_image_bg"
         android:layout_margin="16dp"/>
 
     <TextView
@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
-        android:textColor="#ED1111"
+        android:textColor="@color/price_red"
         android:textStyle="bold"
         android:layout_marginLeft="16sp"
         />

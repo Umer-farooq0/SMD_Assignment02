@@ -35,7 +35,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:layout_margin="16dp"
-        android:background="#E4DEDE">
+        android:background="@color/deals_bg">
 
         <!-- Image -->
         <ImageView
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$108.20"
-                android:textColor="#F60606"
+                android:textColor="@color/price_bright_red"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:layout_marginTop="4dp"/>
@@ -119,7 +119,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="10dp"
-            android:background="#EDE3E3"
+            android:background="@color/card_bg_light"
             android:layout_margin="10dp"
             android:id="@+id/card1"
             android:clickable="true"
@@ -143,7 +143,7 @@
                 android:text="$349.99"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="@color/black"/>
 
 
             <!-- Title -->
@@ -155,7 +155,7 @@
                 android:text="Sony Premium Wireless Headphones"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#222222"
+                android:textColor="@color/text_dark"
                 android:maxLines="2"
                 android:ellipsize="end"/>
 
@@ -168,7 +168,7 @@
                 android:id="@+id/tv_desc2"
                 android:text="Model: WH-1000M4, Black"
                 android:textSize="12sp"
-                android:textColor="#787777"
+                android:textColor="@color/text_hint"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 
@@ -179,7 +179,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp"
-            android:background="#EDE3E3"
+            android:background="@color/card_bg_light"
             android:layout_margin="10dp"
             android:id="@+id/card2"
             android:clickable="true"
@@ -204,7 +204,7 @@
                 android:id="@+id/tv_price3"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:textColor="#000000"/>
+                android:textColor="@color/black"/>
 
 
             <!-- Title -->
@@ -216,7 +216,7 @@
                 android:text="Sony Premium Wireless Headphones"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#222222"
+                android:textColor="@color/text_dark"
                 android:maxLines="2"
                 android:ellipsize="end"/>
 
@@ -229,7 +229,7 @@
                 android:layout_marginTop="2dp"
                 android:text="Model: WH-1000M4, Black"
                 android:textSize="12sp"
-                android:textColor="#787777"
+                android:textColor="@color/text_hint"
                 android:maxLines="1"
                 android:ellipsize="end"/>
 

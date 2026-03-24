@@ -45,8 +45,8 @@ public class splash extends AppCompatActivity {
         // Move to next screen after delay
         new Handler().postDelayed(() -> {
 
-            boolean isFirstTime = sPref.getBoolean("isFirstTime", true);
-            boolean isLogin = sPref.getBoolean("isLogin", false);
+            boolean isFirstTime = sPref.getBoolean("app.isFirstTime", true);
+            boolean isLogin = sPref.getBoolean("user.isLogin", false);
 
             if (isFirstTime) {
                 startActivity(new Intent(splash.this, OnBoarding.class));

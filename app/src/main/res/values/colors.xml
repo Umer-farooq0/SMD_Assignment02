@@ -2,4 +2,30 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Brand colors -->
+    <color name="purple">#6200EE</color>
+    <color name="magenta">#FF00FF</color>
+
+    <!-- Price colors -->
+    <color name="price_red">#ED1111</color>
+    <color name="price_bright_red">#F60606</color>
+
+    <!-- Background colors -->
+    <color name="product_image_bg">#D9CFCF</color>
+    <color name="card_bg">#F5F5F5</color>
+    <color name="card_bg_light">#EDE3E3</color>
+    <color name="deals_bg">#E4DEDE</color>
+    <color name="confirm_bg">#D9CBCB</color>
+    <color name="item_bg">#F0F0F0</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#1A1A1A</color>
+    <color name="text_secondary">#999999</color>
+    <color name="text_dark">#222222</color>
+    <color name="text_hint">#787777</color>
+
+    <!-- Input field colors -->
+    <color name="input_border">#DED5D5</color>
+    <color name="password_toggle">#A29595</color>
 </resources>
