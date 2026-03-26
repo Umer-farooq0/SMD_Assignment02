@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 
 public class HomeFragment extends Fragment {
 
@@ -35,7 +34,6 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         rvItems = view.findViewById(R.id.rvItems);
         rvDealItems = view.findViewById(R.id.rvDealItems);
-        rvItems.setHasFixedSize(true);
 
         // Only populate items list once to avoid duplicates when re-navigating
         if (MyApplication.items.isEmpty()) {
@@ -48,6 +46,7 @@ public class HomeFragment extends Fragment {
         dealAdapter = new DealItemAdapter(requireContext(),MyApplication.items);
         rvItems.setLayoutManager(new GridLayoutManager(requireContext(),2));
         rvItems.setAdapter(adapter);
+        rvItems.setNestedScrollingEnabled(false);
         rvDealItems.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
         rvDealItems.setAdapter(dealAdapter);
     }
