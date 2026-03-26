@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".SearchFragment">
 
-    <!-- Search bar row: back arrow + EditText -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +13,6 @@
         android:padding="8dp"
         android:gravity="center_vertical">
 
-        <!-- Back arrow: hides the keyboard and clears focus -->
         <ImageButton
             android:id="@+id/btn_search_back"
             android:layout_width="40dp"
@@ -41,7 +39,6 @@
 
     </LinearLayout>
 
-    <!-- Search results RecyclerView; scrolls under the keyboard thanks to adjustResize -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_results"
         android:layout_width="match_parent"

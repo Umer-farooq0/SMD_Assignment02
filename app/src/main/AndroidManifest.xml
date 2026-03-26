@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mid1">
         <activity
+            android:name=".single_deal_item_design"
+            android:exported="false" />
+        <activity
             android:name=".favorite_item_single_view"
             android:exported="false" />
         <activity

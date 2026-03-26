@@ -19,12 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-/**
- * Search fragment that lets users filter products by name.
- * The back arrow button dismisses the keyboard and clears the search field.
- * Using adjustResize (set on the parent activity in the manifest) prevents
- * the soft keyboard from overlapping the results list.
- */
 public class SearchFragment extends Fragment {
 
     EditText etSearch;
@@ -60,25 +54,26 @@ public class SearchFragment extends Fragment {
             hideKeyboard();
         });
 
-        // Filter results as the user types
         etSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            public void afterTextChanged(Editable s) {
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 filterProducts(s.toString().trim());
             }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
         });
+
+
     }
 
-    /**
-     * Filters MyApplication.items by name (case-insensitive) and refreshes the RecyclerView.
-     * An empty query shows all products.
-     */
     private void filterProducts(String query) {
         filteredItems.clear();
         if (query.isEmpty()) {
@@ -93,7 +88,6 @@ public class SearchFragment extends Fragment {
         searchAdapter.notifyDataSetChanged();
     }
 
-    /** Hides the soft keyboard. */
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) requireContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);

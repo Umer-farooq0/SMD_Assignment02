@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -111,7 +112,16 @@ public class signupFragment extends Fragment {
 
         });
 
+        view.setOnTouchListener((v, event) -> {
+            hideSoftKeyboard(view);
+            return false;
+        });
 
 
+    }
+    private void hideSoftKeyboard(View view) {
+        InputMethodManager imm = (InputMethodManager) getActivity()
+                .getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }

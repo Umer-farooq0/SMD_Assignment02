@@ -60,7 +60,10 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
 
         updateTotalAndVisibility();
 
-        btnCheckout.setOnClickListener(v -> checkoutWithSms());
+        btnCheckout.setOnClickListener((v)->{
+            checkoutWithSms();
+        });
+
     }
 
     @Override
@@ -72,16 +75,12 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
         }
     }
 
-    /** Called by CartItemAdapter whenever the cart changes (add, remove, quantity change). */
     @Override
     public void onCartChanged() {
         updateTotalAndVisibility();
     }
 
-    /**
-     * Recalculates the total price and toggles the empty-cart message visibility.
-     * Total is the sum of (price × quantity) for all cart items.
-     */
+
     private void updateTotalAndVisibility() {
         double total = calculateTotal();
         tvCartTotal.setText(getString(R.string.total_label) + " $" + String.format("%.2f", total));
@@ -95,7 +94,6 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
         }
     }
 
-    /** Parses a price string like "$349.99" and returns the double value. */
     private double parsePrice(String priceStr) {
         try {
             return Double.parseDouble(priceStr.replace("$", "").trim());
@@ -104,7 +102,7 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
         }
     }
 
-    /** Returns the sum of price * quantity for all cart items. */
+
     private double calculateTotal() {
         double total = 0;
         for (CartItem ci : MyApplication.cartItems) {
@@ -113,7 +111,6 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
         return total;
     }
 
-    /** Builds the SMS order summary and initiates sending. */
     private void checkoutWithSms() {
         if (MyApplication.cartItems.isEmpty()) {
             Toast.makeText(requireContext(), getString(R.string.cart_empty), Toast.LENGTH_SHORT).show();
@@ -129,10 +126,6 @@ public class CartFragment extends Fragment implements CartItemAdapter.OnCartChan
         }
     }
 
-    /**
-     * Builds and sends an SMS containing all cart items and the total price.
-     * Format: product name (xQty) - $lineTotal, then Total at the bottom.
-     */
     private void sendOrderSms() {
         StringBuilder message = new StringBuilder("Order from FastMart:\n");
         int index = 1;

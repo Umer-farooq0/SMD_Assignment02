@@ -6,17 +6,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView rvItems;
+    RecyclerView rvItems , rvDealItems;
 
-    ItemAdapter adapter;
+    ItemAdapter adapter ;
+    DealItemAdapter dealAdapter;
+
 
 
     @Override
@@ -30,6 +34,7 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvItems = view.findViewById(R.id.rvItems);
+        rvDealItems = view.findViewById(R.id.rvDealItems);
         rvItems.setHasFixedSize(true);
 
         // Only populate items list once to avoid duplicates when re-navigating
@@ -40,8 +45,10 @@ public class HomeFragment extends Fragment {
         }
 
         adapter = new ItemAdapter(requireContext(), MyApplication.items);
+        dealAdapter = new DealItemAdapter(requireContext(),MyApplication.items);
         rvItems.setLayoutManager(new GridLayoutManager(requireContext(),2));
         rvItems.setAdapter(adapter);
-
+        rvDealItems.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false));
+        rvDealItems.setAdapter(dealAdapter);
     }
 }
