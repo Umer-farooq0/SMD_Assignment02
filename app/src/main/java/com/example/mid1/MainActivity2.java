@@ -3,22 +3,21 @@ package com.example.mid1;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.google.android.material.tabs.TabLayout;
-import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    TabLayout tabLayout;
+    BottomNavigationView bottomNavigationView;
     ViewPager2 viewPager2;
-    TabLayoutMediator mediator;
     myAdapter2 adapter2;
+    private boolean isNavigating = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,39 +31,44 @@ public class MainActivity2 extends AppCompatActivity {
 
         init();
     }
-    private void init(){
-        tabLayout = findViewById(R.id.tablayout);
+
+    private void init() {
+        bottomNavigationView = findViewById(R.id.bottomNavigationView);
         viewPager2 = findViewById(R.id.viewpager2);
         adapter2 = new myAdapter2(this);
         viewPager2.setAdapter(adapter2);
-        mediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
-            @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int i) {
-                switch (i){
-                    case 0:
-                        tab.setText("Home");
-                        tab.setIcon(R.drawable.home);
-                        break;
-                    case 1:
-                        tab.setText("Search");
-                        tab.setIcon(R.drawable.search);
-                        break;
-                    case 2:
-                        tab.setText("Saved");
-                        tab.setIcon(R.drawable.favorite);
-                        break;
-                    case 3:
-                        tab.setText("Cart");
-                        tab.setIcon(R.drawable.cart);
-                        break;
-                    case 4:
-                        tab.setText("Account");
-                        tab.setIcon(R.drawable.account);
-                        break;
-                }
-            }
+        viewPager2.setUserInputEnabled(false);
 
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            if (isNavigating) return true;
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                viewPager2.setCurrentItem(0, false);
+            } else if (id == R.id.nav_search) {
+                viewPager2.setCurrentItem(1, false);
+            } else if (id == R.id.nav_saved) {
+                viewPager2.setCurrentItem(2, false);
+            } else if (id == R.id.nav_cart) {
+                viewPager2.setCurrentItem(3, false);
+            } else if (id == R.id.nav_account) {
+                viewPager2.setCurrentItem(4, false);
+            }
+            return true;
         });
-        mediator.attach();
+
+        viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                isNavigating = true;
+                switch (position) {
+                    case 0: bottomNavigationView.setSelectedItemId(R.id.nav_home); break;
+                    case 1: bottomNavigationView.setSelectedItemId(R.id.nav_search); break;
+                    case 2: bottomNavigationView.setSelectedItemId(R.id.nav_saved); break;
+                    case 3: bottomNavigationView.setSelectedItemId(R.id.nav_cart); break;
+                    case 4: bottomNavigationView.setSelectedItemId(R.id.nav_account); break;
+                }
+                isNavigating = false;
+            }
+        });
     }
 }
